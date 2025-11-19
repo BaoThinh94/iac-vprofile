@@ -36,3 +36,5 @@ jobs:
 
       - name: Confirm destroy completed
         run: echo "🔥 Terraform destroy completed. All resources removed."
+
+        
