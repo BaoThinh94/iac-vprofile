@@ -2,7 +2,7 @@ name: Terraform Destroy On Request
 on:
   push:
     branches:
-      - destroy     ## branch trigger việc destroy
+      - destroy     ### branch trigger việc destroy
 env:
   AWS_REGION: us-east-1
 
