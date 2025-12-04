@@ -9,3 +9,9 @@ variable "clusterName" {
   type        = string
   default     = "kitops-eks"
 }
+
+variable "repository_names" {
+  description = "Danh sách các tên ECR repository cần tạo."
+  type        = list(string)
+  default     = ["vprofiledb", "vprofileapp"]
+}
