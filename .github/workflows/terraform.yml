@@ -31,6 +31,12 @@ jobs:
       - name: Terraform init
         run: terraform init
 
+      - name: Destroy EKS first
+        run: terraform destroy -target=module.eks -auto-approv
+
+      - name: Sleep for ENI cleanup
+        run: sleep 180   # 3 minutes (AWS cần thời gian delete ENI)
+
       - name: Terraform destroy
         run: terraform destroy -auto-approve
 
