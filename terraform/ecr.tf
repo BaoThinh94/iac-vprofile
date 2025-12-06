@@ -2,8 +2,8 @@ resource "aws_ecr_repository" "vprofile_repo" {
   for_each             = toset(var.repository_names)
   name                 = each.key
   image_tag_mutability = "MUTABLE"
-
-  # Cài đặt quét hình ảnh (Image Scanning)
+  force_delete         = true
+  ## Cài đặt quét hình ảnh (Image Scanning)
   image_scanning_configuration {
     scan_on_push = true
   }
@@ -13,8 +13,4 @@ resource "aws_ecr_repository" "vprofile_repo" {
     encryption_type = "AES256"
   }
 
-  tags = {
-    Name        = each.key
-    Environment = "vProfile"
-  }
 }
