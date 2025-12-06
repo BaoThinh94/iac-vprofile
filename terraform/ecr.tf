@@ -3,7 +3,6 @@ resource "aws_ecr_repository" "vprofile_repo" {
   name                 = each.key
   image_tag_mutability = "MUTABLE"
   force_delete         = true
-  
   ## Cài đặt quét hình ảnh (Image Scanning)
   image_scanning_configuration {
     scan_on_push = true
