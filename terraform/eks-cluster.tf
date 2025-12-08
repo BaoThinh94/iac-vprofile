@@ -2,9 +2,8 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "19.19.1"
 
-  cluster_name    = local.cluster_name
-  cluster_version = "1.30"
-
+  cluster_name                   = local.cluster_name
+  cluster_version                = "1.30"
   vpc_id                         = module.vpc.vpc_id
   subnet_ids                     = module.vpc.private_subnets
   cluster_endpoint_public_access = true
@@ -33,6 +32,13 @@ module "eks" {
       min_size     = 1
       max_size     = 2
       desired_size = 1
+    }
+  }
+
+  cluster_addons = {
+    aws-ebs-csi-driver = {
+      most_recent              = true
+      service_account_role_arn = aws_iam_role.ebs_csi.arn
     }
   }
 }
