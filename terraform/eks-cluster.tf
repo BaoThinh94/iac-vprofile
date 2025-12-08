@@ -7,7 +7,7 @@ module "eks" {
   vpc_id                         = module.vpc.vpc_id
   subnet_ids                     = module.vpc.private_subnets
   cluster_endpoint_public_access = true
-
+  enable_irsa                    = true
   eks_managed_node_group_defaults = {
     ami_type = "AL2_x86_64"
 
@@ -37,8 +37,10 @@ module "eks" {
 
   cluster_addons = {
     aws-ebs-csi-driver = {
-      most_recent              = true
-      service_account_role_arn = aws_iam_role.ebs_csi.arn
+      most_recent                 = true
+      service_account_role_arn    = aws_iam_role.ebs_csi.arn
+      resolve_conflicts_on_create = "OVERWRITE"
+      resolve_conflicts_on_update = "NONE"
     }
   }
 }
